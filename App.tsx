@@ -1,21 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  useRef
+} from 'react';
+
+import { Home } from './src/screens/Home';
 
 export default function App() {
+  const [text, setText] = useState({
+    title: 'teste'
+  });
+
+  const teste = useRef('teste')
+
+  useEffect(() => {
+    setText({
+      title: 'teste'
+    })
+  }, []);
+
+  // function handleGo() {
+  //   console.log('ok')
+  // }
+
+  const handleGo = useCallback(() => {
+    setText({
+      title: 'ola'
+    })
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Home 
+      title={text.title} 
+      onPress={handleGo}
+    />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
